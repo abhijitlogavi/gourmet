@@ -1,0 +1,11 @@
+import { Metadata } from "next";
+import ProfileClient from "./client";
+
+export const metadata: Metadata = {
+  title: "My Profile | Gourmet",
+  description: "Manage your account and addresses",
+};
+
+export default function ProfilePage() {
+  return <ProfileClient />;
+}
