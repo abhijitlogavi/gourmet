@@ -211,7 +211,7 @@ export function LocationProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const setLocation = useCallback((newLocation: Partial<typeof location>) => {
-    setLocationState((prev) => ({ ...prev, ...newLocation }));
+    setLocationState(prev => ({ ...prev, city: "Detecting...", area: "Detecting...", fullAddress: "" }));
   }, []);
 
   const requestLocation = useCallback(async () => {
@@ -235,7 +235,7 @@ export function LocationProvider({ children }: { children: ReactNode }) {
       // Reverse geocode using Nominatim
       try {
         const response = await fetch(
-          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`,
+          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1&_=${Date.now()}`,
           {
             headers: {
               "Accept-Language": "en",
@@ -284,7 +284,7 @@ export function LocationProvider({ children }: { children: ReactNode }) {
       setLocationState({
         latitude: 19.0277,
         longitude: 72.8305,
-        city: "Mumbai",
+        city: "Navi Mumbai",
         area: "Ulwe",
         fullAddress: "Ulwe, Navi Mumbai, Maharashtra (Fallback)",
       });
