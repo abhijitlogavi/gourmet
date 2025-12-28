@@ -250,10 +250,11 @@ export function LocationProvider({ children }: { children: ReactNode }) {
           latitude,
           longitude,
           city:          
+            data.address?.suburb ||
             data.address?.city ||
             data.address?.town ||
             data.address?.village ||
-            "Mumbai",
+            "Navi Mumbai",
           area:
             data.address?.quarter ||
             data.address?.suburb ||
