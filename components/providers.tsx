@@ -249,10 +249,7 @@ export function LocationProvider({ children }: { children: ReactNode }) {
         setLocationState({
           latitude,
           longitude,
-          city:
-            data.address?.neighbourhood ||
-            data.address?.quarter ||           
-            data.address?.suburb ||
+          city:          
             data.address?.suburb ||
             data.address?.city ||
             data.address?.town ||
