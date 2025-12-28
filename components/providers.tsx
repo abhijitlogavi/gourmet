@@ -250,6 +250,8 @@ export function LocationProvider({ children }: { children: ReactNode }) {
           latitude,
           longitude,
           city:
+            data.address?.quarter ||           
+            data.address?.suburb ||
             data.address?.neighbourhood ||
             data.address?.suburb ||
             data.address?.city ||
