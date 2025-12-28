@@ -211,7 +211,7 @@ export function LocationProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const setLocation = useCallback((newLocation: Partial<typeof location>) => {
-    setLocationState(prev => ({ ...prev, city: "Detecting...", area: "Detecting...", fullAddress: "" }));
+    setLocationState((prev) => ({ ...prev, ...newLocation }));
   }, []);
 
   const requestLocation = useCallback(async () => {
@@ -250,16 +250,13 @@ export function LocationProvider({ children }: { children: ReactNode }) {
           latitude,
           longitude,
           city:          
-            data.address?.suburb ||
             data.address?.city ||
             data.address?.town ||
+            data.address?.village ||
             "Mumbai",
           area:
-            data.address?.road ||
-            data.address?.residential ||
-            data.address?.neighbourhood ||
-            data.address?.suburb ||
             data.address?.quarter ||
+            data.address?.suburb ||
             "Current Location",
           fullAddress: data.display_name || "",
         });
