@@ -250,14 +250,14 @@ export function LocationProvider({ children }: { children: ReactNode }) {
           latitude,
           longitude,
           city:          
-            data.address?.suburb ||
-            data.address?.city ||
+            data.address?.neighbourhood ||   
+            data.address?.municipality ||    
             data.address?.town ||
             data.address?.village ||
             "Navi Mumbai",
           area:
+            data.address?.neighbourhood ||
             data.address?.quarter ||
-            data.address?.suburb ||
             "Current Location",
           fullAddress: data.display_name || "",
         });

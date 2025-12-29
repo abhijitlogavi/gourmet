@@ -189,7 +189,7 @@ export function Header() {
       const data = await res.json();
       const addr = data.address || {};
       const city = addr.city || addr.town || addr.village || addr.state_district || addr.state || "Unknown City";
-      const area = addr.suburb || addr.neighbourhood || addr.road || addr.residential || "Current Location";
+      const area = addr.neighbourhood || addr.suburb || "Current Location";
       const pincode = addr.postcode || "";
       setLocation({
         city,

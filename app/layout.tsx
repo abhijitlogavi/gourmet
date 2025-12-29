@@ -5,12 +5,12 @@ import { Providers } from "./providers";
 import { Header } from "../components/layout/header";
 import { Footer } from "../components/layout/footer";
 import { BottomNav } from "../components/layout/bottom-nav";
-import { AiChatbot } from "../components/chatbot/ai-chatbot"; // <--- Import here
+import { AiChatbot } from "../components/chatbot/ai-chatbot"; 
 
 const fontSans = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Gourmet - Delivery App",
+  title: "Gourmet - Food Delivery App",
   description: "Fastest food delivery in town",
   icons: {
     icon: "/logo.svg",

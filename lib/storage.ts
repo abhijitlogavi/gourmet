@@ -130,8 +130,8 @@ export class MemStorage implements IStorage {
     const TIME_TO_ACCEPT = 10;
     const TIME_TO_PREPARE = 10 + 5;      
     const TIME_TO_READY = 15 + 5;        
-    const TIME_TO_PICKUP = 20 + 20;      
-    const TIME_TO_DELIVER = 30 + 20;     
+    const TIME_TO_PICKUP = 20 + 10;      
+    const TIME_TO_DELIVER = 30 + 30;     
 
 
     const updated = { ...order };
@@ -154,10 +154,6 @@ export class MemStorage implements IStorage {
       updated.pickedUpAt = now;
       updated.deliveryPartnerId = "simulated-driver-1";
       changed = true;
-    } else if (elapsedSeconds > TIME_TO_DELIVER && order.status === "picked_up") {
-      updated.status = "delivered";
-      updated.deliveredAt = now;
-      changed = true;
     }
 
     if (updated.status === "picked_up") {
@@ -179,12 +175,12 @@ export class MemStorage implements IStorage {
         const baseLat = prev?.lat ?? startLat;
         const baseLng = prev?.lng ?? startLng;
 
-        const step = 0.015; // 👈 speed control (smaller = slower)
+        const step = 0.02 + progress * 0.08; // 👈 speed control (smaller = slower)
 
         const currentLat = baseLat + (endLat - baseLat) * step;
         const currentLng = baseLng + (endLng - baseLng) * step;
 
-        const jitter = Math.abs(endLat - baseLat) < 0.0005 ? 0 : (Math.random() - 0.5) * 0.00005; // much smaller
+        const jitter = progress > 0.9 ? 0 : (Math.random() - 0.5) * 0.0005; // much smaller
  
         
         updated.deliveryPartnerLocation = {
@@ -192,9 +188,19 @@ export class MemStorage implements IStorage {
           lng: currentLng + jitter
         };
         changed = true;
+        const distanceToDestination =
+          Math.abs(endLat - currentLat) + Math.abs(endLng - currentLng);
+
+        if (distanceToDestination < 0.0005) {
+          updated.deliveryPartnerLocation = {
+            lat: endLat,
+            lng: endLng
+          };
+          updated.status = "delivered";
+          updated.deliveredAt = now;
+        }
       }
     }
-
     const remainingSeconds = Math.max(0, TIME_TO_DELIVER - elapsedSeconds);
     updated.estimatedDeliveryTime = Math.ceil(remainingSeconds / 60);
 
