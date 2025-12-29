@@ -249,11 +249,9 @@ export function LocationProvider({ children }: { children: ReactNode }) {
         setLocationState({
           latitude,
           longitude,
-          city:          
-            data.address?.neighbourhood ||   
-            data.address?.municipality || 
+          city:           
             data.address?.city ||   
-            data.address?.town ||
+            data.address?.municipality ||
             "Navi Mumbai",
           area:
             data.address?.neighbourhood ||
