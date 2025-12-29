@@ -249,12 +249,13 @@ export function LocationProvider({ children }: { children: ReactNode }) {
         setLocationState({
           latitude,
           longitude,
-          city:           
-            data.address?.city ||   
-            data.address?.municipality ||
+          city:    
+            data.address?.suburb ||    
+            data.address?.neighbourhood ||   
+            data.address?.city ||
             "Navi Mumbai",
           area:
-            data.address?.neighbourhood ||
+            data.address?.suburb ||
             data.address?.quarter ||
             "Current Location",
           fullAddress: data.display_name || "",

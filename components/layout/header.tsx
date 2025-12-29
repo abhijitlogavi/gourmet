@@ -188,8 +188,8 @@ export function Header() {
       if (!res.ok) throw new Error("Failed to fetch address details");
       const data = await res.json();
       const addr = data.address || {};
-      const city = addr.city || addr.town || addr.village || addr.state_district || addr.state || "Unknown City";
-      const area = addr.neighbourhood || addr.suburb || "Current Location";
+      const city = addr.town || addr.city || addr.state_district || addr.state || "Unknown City";
+      const area = addr.suburb || addr.neighbourhood || "Current Location";
       const pincode = addr.postcode || "";
       setLocation({
         city,
