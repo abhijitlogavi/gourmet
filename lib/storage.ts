@@ -175,12 +175,12 @@ export class MemStorage implements IStorage {
         const baseLat = prev?.lat ?? startLat;
         const baseLng = prev?.lng ?? startLng;
 
-        const step = 0.02 + progress * 0.08; // 👈 speed control (smaller = slower)
+        const step = 0.02 + progress * 0.09; // 👈 speed control (smaller = slower)
 
         const currentLat = baseLat + (endLat - baseLat) * step;
         const currentLng = baseLng + (endLng - baseLng) * step;
 
-        const jitter = progress > 0.9 ? 0 : (Math.random() - 0.5) * 0.0005; // much smaller
+        const jitter = progress > 0.96 ? 0 : (Math.random() - 0.5) * 0.0005; // much smaller
  
         
         updated.deliveryPartnerLocation = {
